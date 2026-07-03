@@ -13,7 +13,7 @@ ng serve
 Assim que o servidor estiver em execução, abra o seu navegador e acesse `http://localhost:4200/`. A aplicação será recarregada automaticamente sempre que você modificar qualquer um dos arquivos de código-fonte.
 
 
-## Code scaffolding
+## Estrutura básica de código
 
 O Angular CLI inclui ferramentas poderosas para a geração de código. Para gerar um novo componente, execute:
 
@@ -27,7 +27,7 @@ Para obter uma lista completa de *schematics* disponíveis (como `components`, `
 ng generate --help
 ```
 
-## Building
+## Prédio
 
 Para realizar o build do projeto, execute:
 
@@ -37,7 +37,7 @@ ng build
 
 Isso compilará o seu projeto e armazenará os artefatos de build no diretório `dist/`. Por padrão, o build de produção otimiza a aplicação para desempenho e velocidade.
 
-## Running unit tests
+## Executando testes unitários
 
 Para executar testes unitários com o executor de testes [Vitest](https://vitest.dev/), utilize o seguinte comando:
 
@@ -45,7 +45,7 @@ Para executar testes unitários com o executor de testes [Vitest](https://vitest
 ng test
 ```
 
-## Running end-to-end tests
+## Executando testes de ponta a ponta
 
 Para testes ponta a ponta (e2e), execute:
 
@@ -55,6 +55,6 @@ ng e2e
 
 O Angular CLI não inclui um framework de testes ponta a ponta por padrão. Você pode escolher aquele que melhor atenda às suas necessidades.
 
-## Additional Resources
+## Recursos adicionais
 
 Para mais informações sobre o uso do Angular CLI, incluindo referências detalhadas de comandos, visite a página[Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
