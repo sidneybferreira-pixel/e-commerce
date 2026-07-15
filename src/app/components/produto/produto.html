@@ -1,9 +1,4 @@
-<!--cria uma div que contem as informações do produto-->
-<div>
-    @for(item of produtos;track item){
-         <div>
-            <h3>{{item.nome |  uppercase}}</h3>
-            <p>{{item.preco}}</p>
-         </div>
-        }
+<div class="produto">
+   <h3>{{nome | uppercase}}</h3>
+   <p>{{preco | precoFormatado}}</p>
 </div>
