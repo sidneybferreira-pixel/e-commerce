@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-
+import { Produto } from '../produto/produto';
 @Component({
   selector: 'app-lista-produtos',
-  imports: [],
+  imports: [Produto],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
-export class ListaProdutos {}
+export class ListaProdutos {
+  produtos = [
+    {nome:'Teclado', preco:229.99},
+    {nome: 'Mouse', preco: 129.99}
+    {nome: 'Monito', preco: 2000}
+    {nome: 'Desktop', preco: 4999.99}
+    {nome: 'Headset', preco: 500}
+  ];
+}
