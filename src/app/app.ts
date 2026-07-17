@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { LiataProdutos } from './components/liata-produtos/liata-produtos';
+import { ListaProdutos } from './components/produtos/lista-produtos/lista-produtos';
 import { from } from 'rxjs';
 //import { RouterOutlet } from '@angular/router'; remove a importação do RouterOutle
 //import {Produto} from './components/produto/produto';// importando a classe
-import(LiataProdutos) from './components/liata-produtos/liata-produto';
 @Component({
   selector: 'app-root',
-  imports: [LiataProdutos],
+  imports: [ListaProdutos],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
