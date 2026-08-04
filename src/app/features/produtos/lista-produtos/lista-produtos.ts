@@ -18,6 +18,9 @@ export class ListaProdutos {
   //lista com dados - Array
   produtos = signal<{nome: string; preco: number}[]>([]);
   carregando = signal (true);
+  produtoselecionado = signal <string | null>(null);
+  erro = signal <string | null>(null);
+  
   //!Função para exibir produtos selecionados pelo usuário no console
   exibirProduto (nome: string){
     console.log('Produto Selecionado: ', nome);
@@ -83,6 +86,7 @@ totalCarrinho = computed(() => {
   total + item.preco,0)});
 
   carregarProdutos(){
+    this.erro.set(null);
     this.carregando.set(true);
     this.produtosService.buscarProdutos().subscribe({
     next: (dados) =>{
@@ -92,8 +96,9 @@ totalCarrinho = computed(() => {
     },
     error: (error) =>{
       console.error('Erro ao carregar produtos', error);
+      this.erro.set('Erro ao carregar produtos. Por favor, tente novamente!');
       this.carregando.set(false);
-    }
+    },
   });
 
   }
