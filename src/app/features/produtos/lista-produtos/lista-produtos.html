@@ -1,23 +1,25 @@
-<h2>Produtos:</h2>
-@if (carregando()) {
-    <p>Carregando produtos...</p>
+<h2>Produtos</h2>
+<!--Estado 1:carregando -->
+@if(carregando()){
+    <p><strong> Carregando produtos, Aguarde...</strong></p>
 }
-@if (!carregando()) {
-@for(item of produtos(); track item){
+<!-- Estado 2: erro-->
+    @if(erro()){
+        <p><strong  style="color: red;">{{ erro() }}</strong></p>
+        <button (click)="carregarProdutos()">Tente novamente</button>
+    }
+@if(!carregando() && !erro()){
+@for (item of produtos(); track $index) {
     <app-produto
     [nome]="item.nome"
     [preco]="item.preco"
-    (produtoSelecionado) = "exibirProduto($event)"
-    ></app-produto>
-    <button (click)="adicionarAoCarrinho(item)">Adicionar ao carrinho</button>
+    (produtoSelecionado)="exibirProduto($event)"
+    >
+    </app-produto>
+    <button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho</button>
 }
 }
-<hr>
-<p> <button (click)="adicionarProduto()"> Adicionar Produto</button></p>
-<p> <button (click)="substituirProduto()"> Substituir Produto</button></p>
-<hr>
-<h2>total de Produtos: {{totalProdutos()}}</h2>
-<h3>valor Total: {{valorTotal() | precoFormatado}}</h3>
+
 <hr>
 <h2>Carrinho</h2>
 @for(item of carrinho(); track $index){
