@@ -5,10 +5,10 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [MatButtonModule, MatToolbarModule, RouterLink],
+  imports: [MatToolbarModule, MatButtonModule, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
-  nomeLoja = 'Mercado do Sidney';
+  nomeLoja = 'Mercado do Sidney'
 }
