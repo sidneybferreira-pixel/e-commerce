@@ -1,14 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
+import { LowerCasePipe } from '@angular/common';
 import { usuarioLogado, login, logout } from './core/auth';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { Header } from './chared/layout/header/header';
-import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, UpperCasePipe, MatButtonModule, Header, MatToolbar],
+  imports: [RouterOutlet, RouterLink, UpperCasePipe, MatButtonModule, MatCardModule, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
