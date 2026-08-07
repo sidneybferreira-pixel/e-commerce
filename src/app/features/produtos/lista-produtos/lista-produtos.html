@@ -9,7 +9,8 @@
         <button (click)="carregarProdutos()">Tente novamente</button>
     }
 @if(!carregando() && !erro()){
-@for (item of produtos(); track $index) {
+    <section class="grid-produtos">
+        @for (item of produtos(); track $index) {
     <app-produto
     [nome]="item.nome"
     [preco]="item.preco"
@@ -18,6 +19,7 @@
     >
     </app-produto>
 }
+    </section>
 }
 
 <hr>
