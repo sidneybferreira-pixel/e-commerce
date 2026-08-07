@@ -5,7 +5,7 @@ import { LowerCasePipe } from '@angular/common';
 import { usuarioLogado, login, logout } from './core/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { Header } from './chared/layout/header/header';
+import { Header } from './hared/layout/header/header';
 
 @Component({
   selector: 'app-root',
