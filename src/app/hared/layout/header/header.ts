@@ -12,7 +12,7 @@ import { inject } from '@angular/core';
   styleUrl: './header.css',
 })
 export class Header {
-  nomeLoja = 'Mercado da Anny';
+  nomeLoja = 'Mercado do Sidney';
   private carrinhoService = inject(CarrinhoService);
   quantidadeHeader =this.carrinhoService.quantidadeitens;
 }
