@@ -31,9 +31,5 @@
         <small style="color: red;">ENDEREÇO INVÁLIDO</small>
       }
 
-    @if(formulario.get('nome')?.errors?.['minLength']){
-        <small style="color: red;">ENDEREÇO DEVE TER NO MÍNIMO (5) CINCO LETRAS</small>
-    }
-
     <button type="button" (click)="finalizar()"> Finalizar Compra </button>
      </form>
