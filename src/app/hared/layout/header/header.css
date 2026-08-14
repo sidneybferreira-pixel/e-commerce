@@ -1,12 +1,17 @@
 mat-toolbar {
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .flex-spacer {
-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 button {
-    margin-left: 8px;
+  margin-left: 8px;
+}
+
+.email-usuario {
+  font-size: 16px;
+  color: #ffffff;
 }
