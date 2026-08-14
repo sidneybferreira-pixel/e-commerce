@@ -16,13 +16,14 @@ export const routes: Routes  = [
     }, 
     {
          path:'carrinho', 
-         canActivate:[authGuard ],
+         canActivate:[authGuard],
         loadComponent:() =>
             import('./features/carrinho/carrinho/carrinho')
         .then((m) => m.Carrinho),
     }, 
     {
         path:'checkout',
+        canActivate:[authGuard],
         loadComponent:() =>
             import('./features/checkout/checkout/checkout').then((m)=> m.Checkout)
     },
