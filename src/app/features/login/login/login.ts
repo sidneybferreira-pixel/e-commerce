@@ -41,6 +41,11 @@ export class Login {
       return;
     }
 
+    if(this.authService.admin()){
+      this.router.navigateByUrl('/admin');
+      return;
+    }
+
     const email = this.formulario.value.email ?? '';
     const senha = this.formulario.value.senha ?? '';
 
