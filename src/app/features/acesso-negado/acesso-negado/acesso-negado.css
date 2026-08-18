@@ -1,0 +1,18 @@
+.acesso-negado{
+    max-width: 600px;
+}
+.acesso-negado p{
+    line-height: 1.5;
+}
+
+button{
+    margin-top: 16px;
+    padding: 8px 16px;
+    margin: 10px;
+}
+.acesso-negado img {
+  display: block;
+  width: 250px;
+  height: auto;
+  margin: 20px auto;
+}
