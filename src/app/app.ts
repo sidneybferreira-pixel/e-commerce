@@ -4,8 +4,7 @@ import { UpperCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Header } from './hared/layout/header/header';
-import { AuthService } from './core/services/auth.service';
-
+import { AuthFacade } from './core/facades/auth.facade';
 @Component({
   selector: 'app-root',
   imports: [
@@ -24,9 +23,9 @@ export class App {
 
   nomeLoja = 'Mercado do Sidney';
 
-  authService = inject(AuthService);
+  authFacade = inject(AuthFacade);
 
-  usuarioLogado = this.authService.usuarioLogado;
-  login = this.authService.login.bind(this.authService);
-  logout = this.authService.logout.bind(this.authService);
+  usuarioLogado = this.authFacade.usuarioLogado;
+  login = this.authFacade.sair.bind(this.authFacade);
+  logout = this.authFacade.sair.bind(this.authFacade);
 }
