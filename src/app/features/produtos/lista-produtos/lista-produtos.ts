@@ -31,8 +31,8 @@ export class ListaProdutos {
   public carrinhoService = inject(CarrinhoService);
 
   // Quantidade e total do carrinho
-  quantidadeCarrinho = this.carrinhoService.quantidadeitens;
-  totalCarrinho = this.carrinhoService.totalitens;
+  quantidadeCarrinho = this.carrinhoService.quantidadeCarrinho;
+  totalCarrinho = this.carrinhoService.totalCarrinho;
 
   // Quantidade de produtos
   totalprodutos = computed(() => this.produtos().length);
@@ -119,7 +119,7 @@ export class ListaProdutos {
       next: (dados) => {
 
         const produtos =
-          this.produtosService.transformarProdutos(dados);
+          this.produtosService.TransformarProdutos(dados);
 
         this.produtos.set(produtos);
         this.carregando.set(false);
