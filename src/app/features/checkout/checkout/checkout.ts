@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -9,12 +10,20 @@ import {
 } from '@angular/forms';
 
 import { CarrinhoService } from '../../../core/services/carrinho.service';
+
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
+
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, PrecoFormatadoPipe],
+
+  imports: [
+    ReactiveFormsModule,
+    PrecoFormatadoPipe,
+    MatButtonModule
+  ],
+
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
@@ -25,6 +34,7 @@ export class Checkout {
   compraFinalizada = signal(false);
 
   formulario = new FormGroup({
+
     nome: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
@@ -40,19 +50,25 @@ export class Checkout {
       Validators.required,
       Validators.minLength(5)
     ]),
+
   });
 
   finalizar() {
+
     this.compraFinalizada.set(false);
 
     if (this.carrinhoService.carrinhoVazio()) {
-      console.log('Não é possível finalizar a compra com o carrinho vazio');
+      console.log(
+        'Não é possível finalizar a compra com o carrinho vazio'
+      );
       return;
     }
 
     if (this.formulario.invalid) {
       console.log('Formulário Inválido!');
+
       this.formulario.markAllAsTouched();
+
       return;
     }
 
