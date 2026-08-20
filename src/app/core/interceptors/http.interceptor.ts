@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { tap, catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
-import { AuthFacade } from '../facades/auth.facade';
+import { AuthFacade} from '../facades/auth.facade';
 import { Router } from '@angular/router';
 
 export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
@@ -29,7 +29,7 @@ export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
       console.error('ERRO GLOBAL:', error);
 
       if (error.status === 401) {
-        console.warn(
+        console.error(
           'Erro de autenticação de usuário:',
           error
         );
@@ -40,13 +40,12 @@ export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 500) {
         console.warn('Erro interno do servidor!');
       }
-
       if(error.status === 403){
-        console.warn('Acesso Proibido, Usuário sem Permissão!');
+        console.warn('acesso proibido, Usuário sem permissão!');
         router.navigateByUrl('/produtos');
       }
 
       return throwError(() => error);
-    }),
+    })
   );
 };
