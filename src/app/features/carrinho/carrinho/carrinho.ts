@@ -1,30 +1,38 @@
 import { Component, inject } from '@angular/core';
+
 import { RouterLink, Router } from '@angular/router';
+
 import { MatButtonModule } from '@angular/material/button';
+
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
+
 import { AuthFacade } from '../../../core/facades/auth.facade';
+
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 
 @Component({
   selector: 'app-carrinho',
-  imports: [],
+  imports: [PrecoFormatadoPipe],
   templateUrl: './carrinho.html',
   styleUrl: './carrinho.css',
 })
 export class Carrinho {
+
   private router = inject(Router);
+
   public carrinhoFacade = inject(CarrinhoFacade);
+
   private authFacade = inject(AuthFacade);
 
-  removerItem(rmvItem: number){
+  removerItem(rmvItem: number) {
     this.carrinhoFacade.removerItem(rmvItem);
   }
 
-  limparCarrinho(){
+  limparCarrinho() {
     this.carrinhoFacade.limpar();
   }
 
-  cancelarCompra(){
+  cancelarCompra() {
     this.carrinhoFacade.limpar();
     this.authFacade.sair();
     this.router.navigateByUrl('/login');
