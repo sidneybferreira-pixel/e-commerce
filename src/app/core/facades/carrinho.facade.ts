@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+
 import { CarrinhoService } from '../services/carrinho.service';
 
 @Injectable({
@@ -13,6 +14,8 @@ export class CarrinhoFacade {
   quantidadeCarrinho = this.carrinhoService.quantidadeCarrinho;
 
   totalCarrinho = this.carrinhoService.totalCarrinho;
+
+  carrinhoVazio = this.carrinhoService.carrinhoVazio;
 
   adicionar(produto: { nome: string; preco: number }) {
     this.carrinhoService.adicionar(produto);
