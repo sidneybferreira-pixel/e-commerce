@@ -1,39 +1,105 @@
-import { Injectable} from "@angular/core";
-import { signal } from "@angular/core";
-import { computed } from "@angular/core";
+import { isPlatformBrowser } from '@angular/common';
+import {
+  Injectable,
+  signal,
+  computed,
+  effect,
+  inject,
+  PLATFORM_ID
+} from '@angular/core';
 
-type Itemcarrinho ={
-    nome: string;
-    preco: number;
-}
+import { ItemCarrinho } from '../models/item-carrinho';
 
 @Injectable({
-    providedIn:'root'
+  providedIn: 'root',
 })
-
 export class CarrinhoService {
 
-    //!estado global-criado com sucesso
-    private carrinho = signal<Itemcarrinho[]>([]);
+  private platformId = inject;
 
-    //? seleções
-    itensCarrinho = computed(() => this.carrinho());
-    quantidadeCarrinho = computed(() => this.carrinho().length);
-    totalCarrinho = computed(() =>
-    this.carrinho().reduce((total, item) => total + item.preco,0));
-    carrinhoVazio = computed(() => this.carrinho().length === 0);
+  private readonly chaveStorage = 'minha-loja-carrinho';
 
-    // TODO :AÇÕES
-adicionar(produto:Itemcarrinho){
-    this.carrinho.update(lista =>[...lista, produto]);
-}
-// TODO: ação de limpeza
-limpar(){
-    this.carrinho.set([]);
-}
+  private carrinho = signal<ItemCarrinho[]>(
+    this.carregarCarrinhoSalvo()
+  );
 
-removerItem(rmvItem: number){
+  // SELECTORS
+  itens = computed(() => this.carrinho());
+
+  quantidadeItens = computed(() =>
+    this.carrinho().length
+  );
+
+  totalItens = computed(() =>
+    this.carrinho().reduce(
+      (total, item) => total + item.preco,
+      0
+    )
+  );
+
+  carrinhoVazio = computed(() =>
+    this.carrinho().length === 0
+  );
+  quantidadeCarrinho: any;
+  totalCarrinho: any;
+
+  constructor() {
+    effect(() => {
+      this.salvarCarrinho(this.carrinho());
+    });
+  }
+
+  // ACTIONS
+  adicionar(produto: ItemCarrinho) {
+    this.carrinho.update((lista) => [
+      ...lista,
+      produto
+    ]);
+  }
+
+  removerItem(indice: number) {
     this.carrinho.update((listaAtual) =>
-    listaAtual.filter((_, index) => index !== rmvItem));
-}
+      listaAtual.filter(
+        (_, index) => index !== indice
+      )
+    );
+  }
+
+  limpar() {
+    this.carrinho.set([]);
+  }
+
+  private estaNoNavegador(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
+  private carregarCarrinhoSalvo(): ItemCarrinho[] {
+    if (!this.estaNoNavegador()) {
+      return [];
+    }
+
+    const dadosSalvos =
+      localStorage.getItem(this.chaveStorage);
+
+    if (!dadosSalvos) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(dadosSalvos) as ItemCarrinho[];
+    } catch {
+      return [];
+    }
+  }
+
+  private salvarCarrinho(itens: ItemCarrinho[]) {
+    if (!this.estaNoNavegador()) {
+      return;
+    }
+
+    localStorage.setItem(
+      this.chaveStorage,
+      JSON.stringify(itens)
+    );
+  }
 }
