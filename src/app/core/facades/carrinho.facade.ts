@@ -12,7 +12,7 @@ export class CarrinhoFacade {
   quantidadeItens = this.carrinhoService.quantidadeItens;
   totalItens = this.carrinhoService.totalItens;
   carrinhoVazio = this.carrinhoService.carrinhoVazio;
-  quantidadeCarrinho: any;
+  quantidadeCarrinho = this.carrinhoService.quantidadeCarrinho;
 
   adicionar(produto: { nome: string; preco: number }) {
     this.carrinhoService.adicionar(produto);
