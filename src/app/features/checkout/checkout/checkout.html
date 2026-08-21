@@ -36,32 +36,35 @@
 }
 @else {
 
-<section>
-  <h3>Resumo da compra</h3>
+  <section>
 
-  <p>
-    <strong>Itens do carrinho: </strong>
-    {{ carrinhoService.quantidadeCarrinho() }}
-  </p>
+    <h3>Resumo da compra</h3>
 
-  <p>
-    <strong>Total: </strong>
-    {{ carrinhoService.totalCarrinho() | precoFormatado }}
-  </p>
+    <p>
+      <strong>Itens do carrinho: </strong>
+      {{ carrinhoService.quantidadeItens() }}
+    </p>
 
-  <button
-    mat-stroked-button
-    color="primary"
-    type="button"
-    routerLink="/carrinho">
-    Revisar carrinho
-  </button>
-</section>
+    <p>
+      <strong>Total: </strong>
+      {{ carrinhoService.totalItens() | precoFormatado }}
+    </p>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      routerLink="/carrinho">
+      Revisar carrinho
+    </button>
+
+  </section>
 
   <hr>
 
   <form [formGroup]="formulario">
 
+    <!-- NOME -->
     <p>
       <input
         type="text"
@@ -91,6 +94,8 @@
       </small>
     }
 
+
+    <!-- EMAIL -->
     <p>
       <input
         type="email"
@@ -114,6 +119,8 @@
       </small>
     }
 
+
+    <!-- ENDEREÇO -->
     <p>
       <input
         type="text"
@@ -137,7 +144,11 @@
       </small>
     }
 
+
+    <!-- FINALIZAR -->
     <button
+      mat-raised-button
+      color="primary"
       type="button"
       (click)="finalizar()">
       Finalizar Compra
