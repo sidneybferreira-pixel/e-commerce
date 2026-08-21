@@ -1,33 +1,107 @@
 <section class="pagina-carrinho">
 
-    <h2>Carrinho</h2>
-    @if(carrinhoFacade.carrinhoVazio()){
-        <p>Seu Carrinho está vazio</p>
-        <button mat-raised-button color="primary"type="button" routerlink="/produtos">Ver Produtos</button>
-    }@else {
-        <section class="lista-carrinho">
-            @for(item of carrinhoFacade.itensCarrinho(); track $index){
-                <article class="item-carrinho">
-                    <div>
-                        <p><strong>{{ item.nome }}</strong></p>
-                        <p>{{ item.preco | precoFormatado }}</p>
-                        <button mat-raised-button color="warn" type="button"
-                        (click)="removerItem($index)">Remover</button>
-                    </div>
-                </article>
-            }
-        </section>
-        <hr>
-        <section class="resumo-carrinho">
-            <h3>Resumo da Compra</h3>
-            <p><strong>Itens do Carrinho: </strong>{{carrinhoFacade.quantidadeCarrinho()}}</p>
-            <p><strong> Total: </strong> {{carrinhoFacade.totalCarrinho()| precoFormatado}} </p>
-        </section>
-        <section class="açoes-carrinho">
-            <button mat-raised-button color="primary" type="button" (click)="limparCarrinho()">Limpar Carrinho</button>
-            <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver Produtos</button>
-            <button mat-raised-button color="btn-confirmar" type="button" routerLink="/checkout">Finalizar Compra</button>
-            <button mat-raised-button color="btn-confirmar" type="button" (click)="cancelarCompra()">Cancelar Compra</button>
-        </section>
-    }
+  <h2>Carrinho</h2>
+
+  @if(carrinhoFacade.carrinhoVazio()) {
+
+    <p>Seu carrinho está vazio</p>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      routerLink="/produtos">
+      Ver Produtos
+    </button>
+
+  } @else {
+
+    <section class="lista-carrinho">
+
+      @for (item of carrinhoFacade.itens(); track $index) {
+
+        <article class="item-carrinho">
+
+          <div>
+
+            <p>
+              <strong>{{ item.nome }}</strong>
+            </p>
+
+            <p>
+              {{ item.preco | precoFormatado }}
+            </p>
+
+            <button
+              mat-raised-button
+              color="warn"
+              type="button"
+              (click)="removerItem($index)">
+              Remover
+            </button>
+
+          </div>
+
+        </article>
+
+      }
+
+    </section>
+
+    <hr>
+
+    <section class="resumo-carrinho">
+
+      <h3>Resumo da Compra</h3>
+
+      <p>
+        <strong>Itens do Carrinho: </strong>
+        {{ carrinhoFacade.quantidadeItens() }}
+      </p>
+
+      <p>
+        <strong>Total: </strong>
+        {{ carrinhoFacade.totalItens() | precoFormatado }}
+      </p>
+
+    </section>
+
+    <section class="acoes-carrinho">
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="limparCarrinho()">
+        Limpar Carrinho
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        routerLink="/produtos">
+        Ver Produtos
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        routerLink="/checkout">
+        Finalizar Compra
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="cancelarCompra()">
+        Cancelar Compra
+      </button>
+
+    </section>
+
+  }
+
 </section>
