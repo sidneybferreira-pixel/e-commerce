@@ -1,158 +1,91 @@
 <h2>Checkout</h2>
 
-@if (compraFinalizada()) {
+@if (pedidoFinalizado()) {
 
-  <p>
-    <strong>Compra finalizada com sucesso!</strong>
-  </p>
+    <section class="pedido-finalizado">
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    routerLink="/produtos">
-    Comprar mais
-  </button>
+        <h3>PEDIDO FINALIZADO COM SUCESSO</h3>
 
+        <p>
+            <strong>Código: </strong>
+            {{ pedidoFinalizado()?.codigo }}
+        </p>
+
+        <p>
+            <strong>Cliente: </strong>
+            {{ pedidoFinalizado()?.cliente }}
+        </p>
+
+        <p>
+            <strong>E-mail: </strong>
+            {{ pedidoFinalizado()?.email }}
+        </p>
+
+        <p>
+            <strong>Itens comprados: </strong>
+            {{ pedidoFinalizado()?.quantidadeItens }}
+        </p>
+
+        <p>
+            <strong>Total: </strong>
+          {{ pedidoFinalizado()?.total ?? 0 | precoFormatado }}
+        </p>
+
+        <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            routerLink="/produtos">
+            Fazer compras novamente
+        </button>
+
+    </section>
 }
-@else if (carrinhoService.carrinhoVazio()) {
 
-  <p style="color: red;">
-    <strong>Seu carrinho está vazio!</strong>
-  </p>
+@if (carrinhoService.carrinhoVazio() && !pedidoFinalizado()) {
 
-  <p style="color: red;">
-    Adicione produtos antes de finalizar a compra!
-  </p>
+    <section class="carrinho-vazio">
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    routerLink="/produtos">
-    Ver produtos
-  </button>
+        <h3>Seu carrinho está vazio!</h3>
 
-}
-@else {
+        <p>
+            Adicione Produtos antes de finalizar a compra!
+        </p>
 
-  <section>
+        <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            routerLink="/produtos">
+            Ver produtos
+        </button>
 
-    <h3>Resumo da compra</h3>
+    </section>
 
-    <p>
-      <strong>Itens do carrinho: </strong>
-      {{ carrinhoService.quantidadeItens() }}
-    </p>
+} @else if (!pedidoFinalizado()) {
 
-    <p>
-      <strong>Total: </strong>
-      {{ carrinhoService.totalItens() | precoFormatado }}
-    </p>
+    <section class="compra-resumo">
 
-    <button
-      mat-stroked-button
-      color="primary"
-      type="button"
-      routerLink="/carrinho">
-      Revisar carrinho
-    </button>
+        <h3>Resumo da compra</h3>
 
-  </section>
+        <p>
+            <strong>Itens do carrinho: </strong>
+            {{ carrinhoService.itens().length }}
+        </p>
 
-  <hr>
+        <p>
+            <strong>Total: </strong>
+            {{ carrinhoService.totalItens() | precoFormatado }}
+        </p>
 
-  <form [formGroup]="formulario">
+        <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            routerLink="/carrinho">
+            Revisar carrinho
+        </button>
 
-    <!-- NOME -->
-    <p>
-      <input
-        type="text"
-        formControlName="nome"
-        placeholder="Digite seu nome completo"
-      />
-    </p>
+    </section>
 
-    @if (
-      formulario.get('nome')?.touched &&
-      formulario.get('nome')?.errors?.['required']
-    ) {
-      <small style="color: red;">
-        NOME É OBRIGATÓRIO
-      </small>
-    }
-
-    @if (formulario.get('nome')?.errors?.['minlength']) {
-      <small style="color: red;">
-        NOME DEVE TER NO MÍNIMO (2) DUAS LETRAS
-      </small>
-    }
-
-    @if (formulario.get('nome')?.errors?.['numeroInvalido']) {
-      <small style="color: red;">
-        NOME NÃO PODE CONTER NÚMEROS
-      </small>
-    }
-
-
-    <!-- EMAIL -->
-    <p>
-      <input
-        type="email"
-        formControlName="email"
-        placeholder="Digite seu E-mail"
-      />
-    </p>
-
-    @if (
-      formulario.get('email')?.touched &&
-      formulario.get('email')?.errors?.['required']
-    ) {
-      <small style="color: red;">
-        E-MAIL É OBRIGATÓRIO
-      </small>
-    }
-
-    @if (formulario.get('email')?.errors?.['email']) {
-      <small style="color: red;">
-        E-MAIL INVÁLIDO
-      </small>
-    }
-
-
-    <!-- ENDEREÇO -->
-    <p>
-      <input
-        type="text"
-        formControlName="endereco"
-        placeholder="Digite seu Endereço"
-      />
-    </p>
-
-    @if (
-      formulario.get('endereco')?.touched &&
-      formulario.get('endereco')?.errors?.['required']
-    ) {
-      <small style="color: red;">
-        ENDEREÇO É OBRIGATÓRIO
-      </small>
-    }
-
-    @if (formulario.get('endereco')?.errors?.['minlength']) {
-      <small style="color: red;">
-        ENDEREÇO DEVE TER NO MÍNIMO 5 CARACTERES
-      </small>
-    }
-
-
-    <!-- FINALIZAR -->
-    <button
-      mat-raised-button
-      color="primary"
-      type="button"
-      (click)="finalizar()">
-      Finalizar Compra
-    </button>
-
-  </form>
 }
